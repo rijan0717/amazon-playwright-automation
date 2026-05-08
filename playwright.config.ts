@@ -31,7 +31,8 @@ export default defineConfig({
     baseURL: process.env.BASE_URL ?? 'https://www.amazon.com',
 
     // See the browser open while learning
-    headless: false,
+    headless: process.env.CI ? true : false,
+
 
     // Save screenshot only when a test fails
     screenshot: 'only-on-failure',
