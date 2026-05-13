@@ -5,9 +5,6 @@
 // ============================================================
 
 import { defineConfig, devices } from '@playwright/test';
-import * as dotenv from 'dotenv';
-
-dotenv.config(); // loads your .env file automatically
 
 export default defineConfig({
 
@@ -20,19 +17,36 @@ export default defineConfig({
   // Retry once on CI, never locally
   retries: process.env.CI ? 1 : 0,
 
-  // How many workers (parallel browsers)
+  // How many workers
   workers: 1,
 
-  // Reports — opens HTML report after run
+  // Reports
   reporter: [['html'], ['list']],
 
   use: {
-    // Base URL — so you can write goto('/ap/signin') instead of full URL
+    // Base URL
     baseURL: process.env.BASE_URL ?? 'https://www.amazon.com',
 
-    // See the browser open while learning
+    // Headless in CI, headed locally
     headless: process.env.CI ? true : false,
 
+    // ── Bot detection fixes for CI ─────────────────────────
+    // Pretend to be a real Chrome browser
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+
+    // Real browser headers
+    extraHTTPHeaders: {
+      'Accept-Language': 'en-US,en;q=0.9',
+    },
+
+    // Real screen size
+    viewport: { width: 1280, height: 720 },
+
+    // Slow down in CI to avoid bot detection
+    launchOptions: {
+      slowMo: process.env.CI ? 500 : 0,
+    },
+    // ──────────────────────────────────────────────────────
 
     // Save screenshot only when a test fails
     screenshot: 'only-on-failure',
@@ -40,7 +54,7 @@ export default defineConfig({
     // Save video only when a test fails
     video: 'retain-on-failure',
 
-    // Save trace on first retry (for debugging in CI)
+    // Save trace on first retry
     trace: 'on-first-retry',
 
     // Max time for each action (click, fill, etc.)
@@ -53,7 +67,11 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        // Override device user agent with our custom one
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      },
     },
   ],
 });
