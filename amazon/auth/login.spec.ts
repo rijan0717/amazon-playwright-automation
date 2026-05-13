@@ -20,20 +20,20 @@ test.describe('Amazon Login', () => {
 
   // ── Happy path ────────────────────────────────────────────
 
-//   test('TC_LOGIN_01: valid login navigates away from signin page', async ({ page }) => {
-//     const loginPage = new LoginPage(page);
+  test('TC_LOGIN_01: valid login navigates away from signin page', async ({ page }) => {
+    const loginPage = new LoginPage(page);
 
-//     await loginPage.clickAccountMenu();
-//     await loginPage.enterEmailAndContinue(
-//       process.env.TEST_EMAIL ?? ''
-//     );
-//     await loginPage.enterPasswordAndSignIn(
-//       process.env.TEST_PASSWORD ?? ''
-//     );
+    await loginPage.clickAccountMenu();
+    await loginPage.enterEmailAndContinue(
+      process.env.TEST_EMAIL ?? ''
+    );
+    await loginPage.enterPasswordAndSignIn(
+      process.env.TEST_PASSWORD ?? ''
+    );
 
-//     // After login URL should not be signin page
-//     await expect(page).not.toHaveURL(/ap\/signin/);
-//   });
+    // After login URL should not be signin page
+    await expect(page).not.toHaveURL(/ap\/signin/);
+  });
 
   // ── Negative: Empty email ─────────────────────────────────
 
