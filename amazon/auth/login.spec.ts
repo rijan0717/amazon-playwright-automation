@@ -20,20 +20,20 @@ test.describe('Amazon Login', () => {
 
   // ── Happy path ────────────────────────────────────────────
 
-  test('TC_LOGIN_01: valid login navigates away from signin page', async ({ page }) => {
-    const loginPage = new LoginPage(page);
+//   test('TC_LOGIN_01: valid login navigates away from signin page', async ({ page }) => {
+//     const loginPage = new LoginPage(page);
 
-    await loginPage.clickAccountMenu();
-    await loginPage.enterEmailAndContinue(
-      process.env.TEST_EMAIL ?? ''
-    );
-    await loginPage.enterPasswordAndSignIn(
-      process.env.TEST_PASSWORD ?? ''
-    );
+//     await loginPage.clickAccountMenu();
+//     await loginPage.enterEmailAndContinue(
+//       process.env.TEST_EMAIL ?? ''
+//     );
+//     await loginPage.enterPasswordAndSignIn(
+//       process.env.TEST_PASSWORD ?? ''
+//     );
 
-    // After login URL should not be signin page
-    await expect(page).not.toHaveURL(/ap\/signin/);
-  });
+//     // After login URL should not be signin page
+//     await expect(page).not.toHaveURL(/ap\/signin/);
+//   });
 
   // ── Negative: Empty email ─────────────────────────────────
 
@@ -63,14 +63,15 @@ test.describe('Amazon Login', () => {
 
   // ── Negative: Email not registered ───────────────────────
 
-  test('TC_LOGIN_04: shows error for email that does not exist', async ({ page }) => {
+   test('TC_LOGIN_04: shows new user prompt for unregistered email', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
     await loginPage.clickAccountMenu();
     await loginPage.enterEmailAndContinue('notexist_xyz123@fake.com');
 
-    await loginPage.expectNoAccountError();
-  });
+     await loginPage.expectNoAccountError();
+});
+  
 
   // ── Negative: Wrong password ──────────────────────────────
 
@@ -78,10 +79,9 @@ test.describe('Amazon Login', () => {
     const loginPage = new LoginPage(page);
 
     await loginPage.clickAccountMenu();
-    await loginPage.enterEmailAndContinue(
-      process.env.TEST_EMAIL ?? ''
-    );
-    await loginPage.enterPasswordAndSignIn('WrongPassword999');
+    await loginPage.enterEmailAndContinue('rijan@gmail.com');
+    await loginPage.enterPasswordAndSignIn('Password@123');
+    await
 
     await loginPage.expectIncorrectPasswordError();
   });

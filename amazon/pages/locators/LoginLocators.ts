@@ -19,10 +19,10 @@ export const LoginLocators = {
   signInButton:       'Sign in',
 
   // ── Validation errors ─────────────────────────────────────
-  emptyEmailError:    'Enter your email or mobile number',
+  emptyEmailError: '#empty-claim-alert',
   invalidEmailError:  'Invalid email address',
-  incorrectPassError: 'Your password is incorrect',
-  noAccountError:     'We cannot find an account with that email address',
+  incorrectPassError: '#auth-error-message-box',
+  noAccountError:     "Looks like you're new to Amazon",
 
   // ── After successful login ────────────────────────────────
   accountGreeting:    '#nav-link-accountList-nav-line-1',

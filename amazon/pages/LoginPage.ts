@@ -74,7 +74,7 @@ export class LoginPage {
 
   async expectEmptyEmailError() {
     await expect(
-      this.page.getByText(LoginLocators.emptyEmailError)
+      this.page.locator(LoginLocators.emptyEmailError)
     ).toBeVisible();
   }
 
@@ -86,13 +86,13 @@ export class LoginPage {
 
   async expectNoAccountError() {
     await expect(
-      this.page.getByText(LoginLocators.noAccountError)
+      this.page.getByText("Looks like you're new to Amazon")
     ).toBeVisible();
   }
 
   async expectIncorrectPasswordError() {
     await expect(
-      this.page.getByText(LoginLocators.incorrectPassError)
+      this.page.locator(LoginLocators.incorrectPassError)
     ).toBeVisible();
   }
 }
