@@ -8,6 +8,8 @@ on:
 
 jobs:
   test:
+    # ── CI disabled — Amazon blocks automated browsers on CI servers ──
+    if: false
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
@@ -27,9 +29,9 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
         env:
-          CI: true                            # ← tells config to use headless: true
-          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}       # ← your Amazon email from GitHub secrets
-          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }} # ← your Amazon password from GitHub secrets
+          CI: true
+          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
           BASE_URL: https://www.amazon.com
 
       - uses: actions/upload-artifact@v4
